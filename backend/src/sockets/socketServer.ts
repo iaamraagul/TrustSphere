@@ -2,10 +2,18 @@ import { Server } from "socket.io";
 
 let io: Server;
 
-export const initSocket = (server: any, allowedOrigins: string[]) => {
+export const initSocket = (
+  server: any,
+  isAllowedOrigin: (origin?: string) => boolean,
+) => {
   io = new Server(server, {
     cors: {
-      origin: allowedOrigins,
+      origin: (
+        origin: string | undefined,
+        callback: (error: Error | null, allow?: boolean) => void,
+      ) => {
+        callback(null, isAllowedOrigin(origin));
+      },
       credentials: true,
     },
   });

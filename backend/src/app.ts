@@ -12,18 +12,41 @@ import { initSocket } from "./sockets/socketServer";
 
 dotenv.config();
 
-const allowedOrigins = (process.env.CLIENT_ORIGIN || "http://localhost:4200")
-  .split(",")
-  .map((origin) => origin.trim())
-  .filter(Boolean);
+const allowedOrigins = [
+  "http://localhost:4200",
+  "https://trust-sphere-vert.vercel.app",
+  ...(process.env.CLIENT_ORIGIN || "")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean),
+];
+
+const isAllowedOrigin = (origin?: string): boolean => {
+  if (!origin) {
+    return true;
+  }
+
+  if (allowedOrigins.includes(origin)) {
+    return true;
+  }
+
+  try {
+    const { hostname } = new URL(origin);
+    return hostname === "vercel.app" || hostname.endsWith(".vercel.app");
+  } catch {
+    return false;
+  }
+};
 
 const app = express();
 const server = http.createServer(app);
-initSocket(server, allowedOrigins);
+initSocket(server, isAllowedOrigin);
 
 app.use(
   cors({
-    origin: allowedOrigins,
+    origin: (origin, callback) => {
+      callback(null, isAllowedOrigin(origin));
+    },
     credentials: true,
   }),
 );
