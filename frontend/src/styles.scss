@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800&family=Geist+Mono:wght@500;600;700&display=swap');
+
+:root {
+  --font-sans: 'Geist', 'Plus Jakarta Sans', Inter, system-ui, sans-serif;
+  --font-mono: 'Geist Mono', 'SFMono-Regular', Consolas, monospace;
+  --bg: #f4efe6;
+  --bg-elevated: #fffaf1;
+  --surface: rgba(255, 250, 241, 0.82);
+  --surface-strong: #ebe2d4;
+  --text: #161411;
+  --muted: #786f64;
+  --border: rgba(34, 29, 23, 0.13);
+  --accent: #5a3ff2;
+  --accent-2: #8cff4f;
+  --success: #138a57;
+  --warning: #a9650f;
+  --danger: #b4233a;
+  --sync: #8cff4f;
+  --button-text: #fffaf1;
+  --radius: 8px;
+  --shadow-sm: 0 18px 56px rgba(39, 31, 20, 0.1);
+  --shadow-deep: 0 34px 90px rgba(22, 20, 17, 0.22);
+}
+
+:root[data-theme='dark'] {
+  --bg: #070806;
+  --bg-elevated: #11130f;
+  --surface: rgba(20, 22, 18, 0.82);
+  --surface-strong: rgba(37, 39, 32, 0.88);
+  --text: #f6f0e7;
+  --muted: #a99f91;
+  --border: rgba(246, 240, 231, 0.13);
+  --accent: #8d7aff;
+  --accent-2: #91ff4f;
+  --success: #81f0a4;
+  --warning: #f0b35f;
+  --danger: #ff6f89;
+  --sync: #91ff4f;
+  --button-text: #090a08;
+  --shadow-sm: 0 20px 70px rgba(0, 0, 0, 0.38);
+  --shadow-deep: 0 38px 110px rgba(0, 0, 0, 0.56);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+}
+
+html {
+  color-scheme: light dark;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  color: var(--text);
+  background:
+    radial-gradient(
+      circle at 18% 8%,
+      color-mix(in srgb, var(--accent) 14%, transparent),
+      transparent 34rem
+    ),
+    radial-gradient(
+      circle at 86% 18%,
+      color-mix(in srgb, var(--accent-2) 12%, transparent),
+      transparent 30rem
+    ),
+    var(--bg);
+}
+
+button,
+a,
+input,
+select {
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease,
+    box-shadow 160ms ease;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+button:not(:disabled):hover,
+a:hover,
+.metric-card:hover,
+.stat-card:hover,
+.score-card:hover {
+  transform: translateY(-2px);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: var(--accent);
+}
