@@ -1,0 +1,24 @@
+<div class="audit-page">
+
+  <h1>Audit Logs</h1>
+
+    <table>
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Action</th>
+          <th>Target</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let log of logs">
+          <td>{{log.actor}}</td>
+          <td>{{log.action}}</td>
+          <td>{{log.target}}</td>
+          <td>{{log.createdAt}}</td>
+        </tr>
+      </tbody>
+    </table>
+    
+</div>
