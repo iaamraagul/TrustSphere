@@ -12,12 +12,30 @@ import { initSocket } from "./sockets/socketServer";
 
 dotenv.config();
 
+const allowedOrigins = (process.env.CLIENT_ORIGIN || "http://localhost:4200")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
 const app = express();
 const server = http.createServer(app);
-initSocket(server);
+initSocket(server, allowedOrigins);
 
-app.use(cors());
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  }),
+);
 app.use(express.json());
+
+app.get("/api/health", (_req, res) => {
+  res.json({
+    status: "ok",
+    service: "trustsphere-api",
+    uptime: process.uptime(),
+  });
+});
 
 app.use("/api/auth", authRoutes);
 app.use("/api/dashboard", dashboardRoutes);
