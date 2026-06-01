@@ -1,0 +1,69 @@
+<section class="fraud-page">
+  <div class="page-header">
+    <div>
+      <p class="eyebrow">Fraud Engine</p>
+      <h1>Risk Detection Center</h1>
+      <p>Prioritize identity anomalies, suspicious sessions, and escalated privilege signals.</p>
+    </div>
+  </div>
+
+  <div class="metrics-grid">
+    <article class="metric-card danger">
+      <span>Critical threats</span>
+      <strong>{{ criticalCount }}</strong>
+      <small>Requires immediate review</small>
+    </article>
+
+    <article class="metric-card warning">
+      <span>High-risk events</span>
+      <strong>{{ highCount }}</strong>
+      <small>Active investigation queue</small>
+    </article>
+
+    <article class="metric-card">
+      <span>Total alerts</span>
+      <strong>{{ alerts.length }}</strong>
+      <small>Detected in current window</small>
+    </article>
+  </div>
+
+  <div class="table-shell">
+    <table>
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Risk</th>
+          <th>Reason</th>
+          <th>Score</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let alert of alerts">
+          <td>{{ alert.user }}</td>
+
+          <td>
+            <span
+              class="risk-badge"
+              [class.high]="alert.risk === 'High'"
+              [class.medium]="alert.risk === 'Medium'"
+              [class.critical]="alert.risk === 'Critical'"
+            >
+              {{ alert.risk }}
+            </span>
+          </td>
+
+          <td>{{ alert.reason }}</td>
+          <td>
+            <div class="score">
+              <span>{{ alert.score }}</span>
+              <div class="meter"><i [style.width.%]="alert.score"></i></div>
+            </div>
+          </td>
+          <td>{{ alert.status }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

@@ -1,0 +1,88 @@
+<div class="monitor-page">
+  <div class="page-header">
+    <div>
+      <p class="eyebrow">AI Monitor</p>
+      <h1>Infrastructure Health</h1>
+      <p>Real-time telemetry for inference latency, model capacity, and operational stability.</p>
+    </div>
+
+    <div class="health-chip">
+      <span></span>
+      {{ serverStatus }}
+    </div>
+  </div>
+
+  <div class="metrics-grid">
+    <article class="metric-card">
+      <span>System health</span>
+      <strong>{{ serverStatus }}</strong>
+      <small>All critical nodes responsive</small>
+    </article>
+
+    <article class="metric-card">
+      <span>API latency</span>
+      <strong>{{ apiDelay }}ms</strong>
+      <small>p95 inference response</small>
+    </article>
+
+    <article class="metric-card">
+      <span>CPU usage</span>
+      <strong>{{ cpu }}%</strong>
+      <div class="meter">
+        <i [style.width.%]="cpu"></i>
+      </div>
+    </article>
+
+    <article class="metric-card">
+      <span>Memory usage</span>
+      <strong>{{ memory }}%</strong>
+      <div class="meter">
+        <i [style.width.%]="memory"></i>
+      </div>
+    </article>
+  </div>
+
+  <section class="panel">
+    <div class="panel-header">
+      <div>
+        <p class="eyebrow">Model Nodes</p>
+        <h2>Runtime Performance</h2>
+      </div>
+    </div>
+
+    <div class="table-shell">
+      <table>
+        <thead>
+          <tr>
+            <th>Node</th>
+            <th>Status</th>
+            <th>Latency</th>
+            <th>Throughput</th>
+            <th>Confidence</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr *ngFor="let node of nodes">
+            <td>
+              <strong>{{ node.name }}</strong>
+            </td>
+            <td>
+              <span class="status-pill" [class.warning]="node.status === 'Watching'">{{
+                node.status
+              }}</span>
+            </td>
+            <td>{{ node.latency }}</td>
+            <td>{{ node.throughput }}</td>
+            <td>
+              <div class="confidence">
+                <span>{{ node.confidence }}%</span>
+                <div class="meter small"><i [style.width.%]="node.confidence"></i></div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,49 @@
+<section class="settings-page">
+  <div class="page-header">
+    <div>
+      <p class="eyebrow">Workspace Preferences</p>
+      <h1>Settings</h1>
+      <p>Manage profile, notification, and display preferences for TrustSphere.</p>
+    </div>
+  </div>
+
+  <div class="settings-grid">
+    <article class="settings-panel">
+      <div>
+        <h2>Appearance</h2>
+        <p>Choose a theme that fits your working environment.</p>
+      </div>
+
+      <button class="theme-toggle" type="button" (click)="themeService.toggle()">
+        <span [class.active]="themeService.mode === 'light'">Light</span>
+        <span [class.active]="themeService.mode === 'dark'">Dark</span>
+      </button>
+    </article>
+
+    <article class="settings-panel">
+      <div>
+        <h2>Profile Settings</h2>
+        <p>Profile editing, password rotation, and account metadata will live here.</p>
+      </div>
+
+      <button type="button" disabled>Coming Soon</button>
+    </article>
+
+    <article class="settings-panel">
+      <div>
+        <h2>Notification Preferences</h2>
+        <p>Control when TrustSphere surfaces operational and fraud alerts.</p>
+      </div>
+
+      <label class="toggle-row">
+        <span>Email notifications</span>
+        <input type="checkbox" [(ngModel)]="emailNotifications" />
+      </label>
+
+      <label class="toggle-row">
+        <span>High-risk alerts</span>
+        <input type="checkbox" [(ngModel)]="riskAlerts" />
+      </label>
+    </article>
+  </div>
+</section>
