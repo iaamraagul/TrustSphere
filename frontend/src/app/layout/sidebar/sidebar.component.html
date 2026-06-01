@@ -1,0 +1,21 @@
+<div class="sidebar">
+  <div class="brand">
+    <h2>TrustSphere</h2>
+
+    <p>Verification OS</p>
+  </div>
+
+  <nav>
+    <a routerLink="/dashboard" routerLinkActive="active"> Dashboard </a>
+
+    <a *ngIf="authService.isAdmin()" routerLink="/users" routerLinkActive="active"> Users </a>
+
+    <a routerLink="/audit" routerLinkActive="active"> Audit Logs </a>
+
+    <a routerLink="/monitor" routerLinkActive="active"> AI Monitor </a>
+
+    <a routerLink="/fraud" routerLinkActive="active"> Fraud Engine </a>
+
+    <a routerLink="/settings" routerLinkActive="active"> Settings </a>
+  </nav>
+</div>

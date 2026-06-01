@@ -1,0 +1,45 @@
+<div class="navbar">
+  <div class="title">
+    TrustSphere
+  </div>
+
+  <div class="actions">
+    <button
+      class="sync-toggle"
+      type="button"
+      [class.enabled]="socketService.enabled"
+      (click)="toggleLiveSync()"
+    >
+      <span class="sync-dot"></span>
+      {{ socketService.enabled ? 'Live sync on' : 'Live sync off' }}
+    </button>
+
+    <button class="icon-action" type="button" (click)="toggleTheme()" [attr.aria-label]="'Switch theme'">
+      {{ themeService.mode === 'dark' ? 'Dark' : 'Light' }}
+    </button>
+
+    <button class="notification-bell" type="button" (click)="toggleNotifications()">
+      <span>Notifications</span>
+      <span class="badge">
+        {{ notifications.length }}
+      </span>
+    </button>
+
+    <div class="profile-menu">
+      <span class="user-email">
+        {{ userEmail }}
+      </span>
+      <button class="logout-btn" (click)="logout()">
+        Logout
+      </button>
+    </div>
+
+    <div class="notification-panel" *ngIf="showNotifications">
+      <h4>Notifications</h4>
+      <div *ngFor="let notification of notifications" class="notification-item">
+        <p>{{ notification.message }}</p>
+        <small>{{ notification.time }}</small>
+      </div>
+    </div>
+  </div>
+</div>
