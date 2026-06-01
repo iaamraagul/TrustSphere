@@ -1,0 +1,161 @@
+<section class="users-page">
+  <div class="page-header">
+    <div>
+      <p class="eyebrow">Access Control</p>
+      <h1>User Management</h1>
+      <p>Manage people, roles, and account status for the verification workspace.</p>
+    </div>
+
+    <div class="header-stat">
+      <strong>{{ users.length }}</strong>
+      <span>{{ total }} total users</span>
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <input
+      type="text"
+      placeholder="Search by name, email, or role"
+      [(ngModel)]="searchText"
+      (keyup.enter)="searchUsers()"
+    />
+
+    <button type="button" (click)="searchUsers()">Search</button>
+    <button type="button" class="secondary" (click)="loadUsers()">Refresh</button>
+  </div>
+
+  <form class="add-user-card" *ngIf="isAdmin()" (ngSubmit)="addUser()">
+    <div>
+      <label>Name</label>
+      <input
+        type="text"
+        placeholder="Example: Raagul "
+        [(ngModel)]="newUser.name"
+        name="name"
+      />
+    </div>
+
+    <div>
+      <label>Email</label>
+      <input type="email" placeholder="name@company.com" [(ngModel)]="newUser.email" name="email" />
+    </div>
+
+    <div>
+      <label>Temporary password</label>
+      <input
+        type="password"
+        placeholder="Minimum 6 characters"
+        [(ngModel)]="newUser.password"
+        name="password"
+      />
+    </div>
+
+    <div>
+      <label>Role</label>
+      <select [(ngModel)]="newUser.role" name="role">
+        <option value="USER">General User</option>
+        <option value="ADMIN">Admin</option>
+      </select>
+    </div>
+
+    <button type="submit" [disabled]="saving">{{ saving ? 'Adding...' : 'Add User' }}</button>
+  </form>
+
+  <div class="state-card skeleton-list" *ngIf="loading">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="state-card error" *ngIf="!loading && error">{{ error }}</div>
+
+  <div class="table-shell" *ngIf="!loading && !error">
+    <table *ngIf="users.length; else emptyUsers">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let user of users; trackBy: trackByUserId">
+          <td>
+            <strong>{{ user.name }}</strong>
+            <small>{{ user._id }}</small>
+          </td>
+          <td>{{ user.email }}</td>
+          <td>
+            <span class="role-pill">{{ user.role }}</span>
+          </td>
+          <td>
+            <span class="status-pill" [class.blocked]="user.status === 'BLOCKED'">
+              {{ user.status || 'ACTIVE' }}
+            </span>
+          </td>
+          <td>
+            <div class="actions" *ngIf="isAdmin(); else readOnly">
+              <button type="button" (click)="editUser(user)">Edit</button>
+              <button type="button" (click)="toggleStatus(user)">
+                {{ user.status === 'BLOCKED' ? 'Activate' : 'Block' }}
+              </button>
+              <button type="button" class="danger" (click)="deleteUser(user._id)">Delete</button>
+            </div>
+
+            <ng-template #readOnly>
+              <span class="read-only-badge">Read only</span>
+            </ng-template>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <ng-template #emptyUsers>
+      <div class="empty-state">No users match your search.</div>
+    </ng-template>
+  </div>
+
+  <div class="pagination" *ngIf="!loading && !error && totalPages > 1">
+    <button type="button" class="secondary" [disabled]="page === 1" (click)="previousPage()">
+      Previous
+    </button>
+    <span>Page {{ page }} of {{ totalPages }}</span>
+    <button type="button" class="secondary" [disabled]="page === totalPages" (click)="nextPage()">
+      Next
+    </button>
+  </div>
+
+  <div class="modal" *ngIf="editingUser && isAdmin()">
+    <form class="modal-content" (ngSubmit)="saveUser()">
+      <div class="modal-header">
+        <h2>Edit User</h2>
+        <button type="button" class="icon-button" (click)="editingUser = null">Close</button>
+      </div>
+
+      <label>Name</label>
+      <input [(ngModel)]="editingUser.name" name="editName" />
+
+      <label>Email</label>
+      <input [(ngModel)]="editingUser.email" name="editEmail" />
+
+      <label>Role</label>
+      <select [(ngModel)]="editingUser.role" name="editRole">
+        <option value="USER">General User</option>
+        <option value="ADMIN">Admin</option>
+      </select>
+
+      <label>Status</label>
+      <select [(ngModel)]="editingUser.status" name="editStatus">
+        <option value="ACTIVE">Active</option>
+        <option value="BLOCKED">Blocked</option>
+      </select>
+
+      <div class="modal-actions">
+        <button type="submit">Save Changes</button>
+        <button type="button" class="secondary" (click)="editingUser = null">Cancel</button>
+      </div>
+    </form>
+  </div>
+</section>
