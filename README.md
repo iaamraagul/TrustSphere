@@ -7,24 +7,27 @@ The product goal is simple: give teams one focused command surface to verify, mo
 ## Screenshots
 
 <p>
-  <img src="docs/screenshots/trustsphere-login.png" width="720" alt="TrustSphere login screen" />
+  <img src="docs/screenshots/trustsphere-login.png" width="600" alt="TrustSphere login screen" />
 </p>
 
-<p>
-  <img src="docs/screenshots/trustsphere-dashboard.png" width="720" alt="TrustSphere dashboard screen" />
-</p>
-
-<p>
-  <img src="docs/screenshots/trustsphere-users.png" width="720" alt="TrustSphere admin user management screen" />
-</p>
-
-<p>
-  <img src="docs/screenshots/trustsphere-monitor.png" width="720" alt="TrustSphere AI monitor screen" />
-</p>
-
-<p>
-  <img src="docs/screenshots/trustsphere-register.png" width="720" alt="TrustSphere register screen" />
-</p>
+<table>
+  <tr>
+    <td>
+      <img src="docs/screenshots/trustsphere-dashboard.png" width="320" alt="TrustSphere dashboard screen" />
+    </td>
+    <td>
+      <img src="docs/screenshots/trustsphere-users.png" width="320" alt="TrustSphere admin user management screen" />
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="docs/screenshots/trustsphere-monitor.png" width="320" alt="TrustSphere AI monitor screen" />
+    </td>
+    <td>
+      <img src="docs/screenshots/trustsphere-register.png" width="320" alt="TrustSphere register screen" />
+    </td>
+  </tr>
+</table>
 
 ## Table of Contents
 
