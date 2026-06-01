@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://trustsphere-api.onrender.com/api'
+  apiUrl: 'https://trustsphere-zr4w.onrender.com/api'
 };
 
