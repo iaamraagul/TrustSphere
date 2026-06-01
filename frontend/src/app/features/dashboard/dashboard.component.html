@@ -1,0 +1,108 @@
+<section class="dashboard-page">
+  <div class="loading-screen" *ngIf="loading">
+    <div class="skeleton-hero"></div>
+    <div class="skeleton-grid">
+      <span></span>
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <ng-container *ngIf="!loading">
+    <div class="page-hero">
+      <div>
+        <p class="eyebrow">Enterprise Verification Intelligence</p>
+        <h1>Good to see you, {{ currentUser?.name || 'User' }}</h1>
+        <p class="hero-copy">
+          Monitor verification volume, user access, and fraud risk from one focused workspace.
+        </p>
+      </div>
+
+      <div class="operator-card">
+        <span class="status-dot"></span>
+        <div>
+          <strong>System operational</strong>
+          <small>{{ currentUser?.role || 'USER' }} access</small>
+        </div>
+      </div>
+    </div>
+
+    <div class="error-banner" *ngIf="error">
+      {{ error }}
+      <button type="button" (click)="loadDashboard(true)">Retry</button>
+    </div>
+
+    <div class="metrics-grid">
+      <article class="metric-card">
+        <span>Total users</span>
+        <strong>{{ metrics.users || 0 }}</strong>
+        <small>Active identities in the platform</small>
+      </article>
+
+      <article class="metric-card">
+        <span>Verifications</span>
+        <strong>{{ metrics.verifications || 0 }}</strong>
+        <small>Completed verification checks</small>
+      </article>
+
+      <article class="metric-card">
+        <span>Pending review</span>
+        <strong>{{ metrics.pending || 0 }}</strong>
+        <small>Items waiting for action</small>
+      </article>
+
+      <article class="metric-card danger">
+        <span>Fraud alerts</span>
+        <strong>{{ metrics.fraudAlerts || 0 }}</strong>
+        <small>Signals requiring attention</small>
+      </article>
+    </div>
+
+    <div class="dashboard-grid">
+      <article class="panel chart-panel">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Trend</p>
+            <h2>Verification Analytics</h2>
+          </div>
+        </div>
+
+        <apx-chart
+          [series]="chartSeries"
+          [chart]="chartOptions.chart"
+          [xaxis]="chartOptions.xaxis"
+          [stroke]="chartOptions.stroke"
+          [dataLabels]="chartOptions.dataLabels"
+          [fill]="chartOptions.fill"
+          [grid]="chartOptions.grid"
+          [colors]="chartOptions.colors"
+        >
+        </apx-chart>
+      </article>
+
+      <article class="panel activity-panel">
+        <div class="panel-header">
+          <div>
+            <p class="eyebrow">Live feed</p>
+            <h2>Recent Activity</h2>
+          </div>
+        </div>
+
+        <div class="activity-list" *ngIf="activities.length; else emptyActivity">
+          <div class="activity-item" *ngFor="let activity of activities">
+            <span class="activity-dot"></span>
+            <div>
+              <strong>{{ activity.action }}</strong>
+              <small>{{ activity.time }}</small>
+            </div>
+          </div>
+        </div>
+
+        <ng-template #emptyActivity>
+          <p class="empty-state">No activity records available.</p>
+        </ng-template>
+      </article>
+    </div>
+  </ng-container>
+</section>
