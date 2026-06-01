@@ -1,0 +1,90 @@
+<main class="register-stage">
+  <section class="brand-panel" aria-label="TrustSphere access preview">
+    <nav class="mini-nav">
+      <div class="brand-mark">
+        <span></span>
+        TrustSphere
+      </div>
+      <small>Access Studio</small>
+    </nav>
+
+    <div class="hero-copy">
+      <p class="eyebrow">Create verified access</p>
+      <h1>Start with a clean identity layer.</h1>
+      <p>
+        New accounts enter as user-level operators, keeping governance deliberate while the
+        workspace stays fast and auditable.
+      </p>
+    </div>
+
+    <div class="access-board">
+      <article>
+        <span>Default role</span>
+        <strong>USER</strong>
+      </article>
+      <article>
+        <span>Audit trail</span>
+        <strong>ON</strong>
+      </article>
+      <article class="wide-tile">
+        <span>Live sync</span>
+        <strong>Manual</strong>
+        <small>Realtime starts only when enabled inside the app.</small>
+      </article>
+    </div>
+  </section>
+
+  <section class="register-panel" aria-label="Create account">
+    <div class="form-shell">
+      <div class="form-heading">
+        <p class="eyebrow">New operator</p>
+        <h2>Create access</h2>
+        <p>Register a secure user profile for the TrustSphere workspace.</p>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        <div class="field" [class.invalid]="nameInvalid">
+          <input id="name" type="text" placeholder=" " formControlName="name" autocomplete="name" />
+          <label for="name">Full name</label>
+          <small *ngIf="nameInvalid">Name is required.</small>
+        </div>
+
+        <div class="field" [class.invalid]="emailInvalid">
+          <input
+            id="email"
+            type="email"
+            placeholder=" "
+            formControlName="email"
+            autocomplete="email"
+          />
+          <label for="email">Work email</label>
+          <small *ngIf="emailInvalid">Use a valid email address.</small>
+        </div>
+
+        <div class="field" [class.invalid]="passwordInvalid">
+          <input
+            id="password"
+            type="password"
+            placeholder=" "
+            formControlName="password"
+            autocomplete="new-password"
+          />
+          <label for="password">Password</label>
+          <small *ngIf="passwordInvalid">Password must be at least 6 characters.</small>
+        </div>
+
+        <p class="auth-error" *ngIf="registerError">{{ registerError }}</p>
+
+        <button class="submit-button" type="submit" [disabled]="loading">
+          <span>{{ loading ? 'Creating access' : 'Create account' }}</span>
+          <i></i>
+        </button>
+      </form>
+
+      <div class="bottom-links">
+        <span>Already have access?</span>
+        <button type="button" routerLink="/auth/login">Sign in</button>
+      </div>
+    </div>
+  </section>
+</main>

@@ -1,0 +1,434 @@
+.login-stage {
+  height: 100dvh;
+  min-height: 640px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(420px, 0.88fr);
+  gap: clamp(16px, 2.4vw, 28px);
+  padding: clamp(14px, 2.2vw, 28px);
+  overflow: hidden;
+  color: var(--text);
+  background:
+    linear-gradient(115deg, rgba(0, 0, 0, 0.72), transparent 46%),
+    radial-gradient(
+      circle at 24% 28%,
+      color-mix(in srgb, var(--accent-2) 18%, transparent),
+      transparent 20rem
+    ),
+    radial-gradient(
+      circle at 76% 18%,
+      color-mix(in srgb, var(--accent) 18%, transparent),
+      transparent 26rem
+    ),
+    var(--bg);
+}
+
+.brand-panel,
+.form-shell {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 32px;
+  box-shadow: var(--shadow-deep);
+}
+
+.brand-panel {
+  min-height: 0;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  padding: clamp(18px, 2.4vw, 30px);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 28%),
+    radial-gradient(
+      circle at 78% 72%,
+      color-mix(in srgb, var(--accent-2) 22%, transparent),
+      transparent 18rem
+    ),
+    #080906;
+  color: #f7f1e7;
+}
+
+.brand-panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.34;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 42px 42px;
+  mask-image: radial-gradient(circle at 50% 34%, #000, transparent 72%);
+}
+
+.brand-panel::after {
+  content: '';
+  position: absolute;
+  left: -16%;
+  right: -16%;
+  bottom: -34%;
+  height: 52%;
+  border-radius: 50% 50% 0 0;
+  background: linear-gradient(180deg, rgba(255, 112, 41, 0.7), #050503 58%);
+  filter: blur(1px);
+}
+
+.mini-nav,
+.hero-copy,
+.signal-board {
+  position: relative;
+  z-index: 1;
+}
+
+.mini-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 18px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(18px);
+}
+
+.brand-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+}
+
+.brand-mark span {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: conic-gradient(from 90deg, var(--accent-2), transparent, var(--accent-2));
+  box-shadow: 0 0 24px color-mix(in srgb, var(--accent-2) 80%, transparent);
+}
+
+.mini-nav small,
+.hero-copy p,
+.signal-board small,
+.signal-board span,
+.form-heading p,
+.bottom-links span {
+  color: var(--muted);
+}
+
+.hero-copy {
+  align-self: center;
+  max-width: 780px;
+}
+
+.hero-copy h1 {
+  max-width: 780px;
+  margin: 0;
+  font-size: clamp(38px, 4.8vw, 56px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #f7f1e7;
+}
+
+.hero-copy .hero-description {
+  max-width: 660px;
+  margin-top: 22px;
+  font-size: clamp(18px, 1.8vw, 22px);
+  font-weight: 400;
+  line-height: 1.45;
+  color: rgba(247, 241, 231, 0.85);
+}
+
+.signal-board {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr 0.8fr;
+  gap: 12px;
+}
+
+.signal-board article {
+  min-height: 86px;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+}
+
+.signal-board .large-tile {
+  grid-row: span 2;
+}
+
+.signal-board .wide-tile {
+  grid-column: span 2;
+}
+
+.signal-board strong {
+  display: block;
+  margin-top: 8px;
+  font-family: var(--font-mono);
+  font-size: 27px;
+}
+
+.pulse-line {
+  height: 9px;
+  margin-top: 18px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.pulse-line i {
+  display: block;
+  width: 74%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--accent-2), #fff7cc);
+  animation: breathe 2.8s ease-in-out infinite;
+}
+
+.login-panel {
+  display: grid;
+  place-items: center;
+}
+
+.form-shell {
+  width: min(100%, 520px);
+  max-height: calc(100dvh - 28px);
+  padding: clamp(20px, 3vw, 34px);
+  background:
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--surface) 94%, transparent),
+      color-mix(in srgb, var(--surface-strong) 58%, transparent)
+    ),
+    var(--bg-elevated);
+  backdrop-filter: blur(22px);
+}
+
+.form-shell::before {
+  content: '';
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  right: -120px;
+  top: -120px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  filter: blur(12px);
+}
+
+.form-heading,
+form,
+.bottom-links {
+  position: relative;
+  z-index: 1;
+}
+
+.form-heading h2 {
+  margin: 0;
+  font-size: clamp(30px, 3.2vw, 46px);
+  line-height: 0.98;
+}
+
+.form-heading p:not(.eyebrow) {
+  margin-top: 12px;
+  line-height: 1.55;
+}
+
+form {
+  display: grid;
+  gap: 12px;
+  margin-top: 22px;
+}
+
+.field {
+  position: relative;
+}
+
+.field input {
+  width: 100%;
+  height: 56px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 20px 16px 6px;
+  color: var(--text);
+  background: color-mix(in srgb, var(--bg-elevated) 78%, transparent);
+  outline: none;
+}
+
+.field label {
+  position: absolute;
+  left: 16px;
+  top: 17px;
+  color: var(--muted);
+  pointer-events: none;
+  transform-origin: left center;
+}
+
+.field input:focus,
+.field input:not(:placeholder-shown) {
+  border-color: color-mix(in srgb, var(--accent) 56%, var(--border));
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 13%, transparent);
+}
+
+.field input:focus + label,
+.field input:not(:placeholder-shown) + label {
+  transform: translateY(-13px) scale(0.78);
+  color: var(--accent);
+}
+
+.field small,
+.auth-error {
+  display: block;
+  margin-top: 8px;
+  color: var(--danger);
+  font-size: 12px;
+}
+
+.field.invalid input {
+  border-color: color-mix(in srgb, var(--danger) 64%, var(--border));
+}
+
+.password-field input {
+  padding-right: 74px;
+}
+
+.ghost-button {
+  position: absolute;
+  top: 9px;
+  right: 10px;
+  height: 38px;
+  border: 0;
+  border-radius: 999px;
+  padding: 0 12px;
+  color: var(--text);
+  background: var(--surface-strong);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.role-switch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 6px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--surface-strong);
+}
+
+.role-switch button,
+.submit-button {
+  border: 0;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.role-switch button {
+  min-height: 42px;
+  border-radius: 13px;
+  color: var(--muted);
+  background: transparent;
+}
+
+.role-switch button.active {
+  color: var(--button-text);
+  background: var(--text);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.14);
+}
+
+.submit-button {
+  height: 54px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0 10px 0 22px;
+  color: #080906;
+  background: linear-gradient(135deg, var(--accent-2), #fff06c);
+  box-shadow: 0 18px 44px color-mix(in srgb, var(--accent-2) 24%, transparent);
+}
+
+.submit-button i {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, transparent 45%, #080906 46% 54%, transparent 55%), #fffaf1;
+}
+
+.bottom-links {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.bottom-links button {
+  border: 0;
+  color: var(--accent);
+  background: transparent;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+@keyframes breathe {
+  50% {
+    width: 92%;
+  }
+}
+
+@media (max-width: 760px) {
+  .login-stage {
+    height: auto;
+    min-height: 100dvh;
+    overflow: visible;
+    grid-template-columns: 1fr;
+  }
+
+  .brand-panel {
+    min-height: 620px;
+  }
+
+  .form-shell {
+    max-height: none;
+  }
+}
+
+@media (max-height: 760px) and (min-width: 761px) {
+  .eyebrow {
+    margin-bottom: 8px;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(28px, 3.8vw, 44px);
+  }
+
+  .signal-board .large-tile small,
+  .signal-board .wide-tile small,
+  .form-heading p:not(.eyebrow) {
+    display: none;
+  }
+
+  .signal-board article {
+    min-height: 76px;
+  }
+}
+
+@media (max-width: 640px) {
+  .login-stage {
+    padding: 12px;
+  }
+
+  .brand-panel,
+  .form-shell {
+    border-radius: 24px;
+  }
+
+  .signal-board {
+    grid-template-columns: 1fr;
+  }
+
+  .signal-board .wide-tile {
+    grid-column: auto;
+  }
+}

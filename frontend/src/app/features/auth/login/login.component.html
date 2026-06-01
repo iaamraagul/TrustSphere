@@ -1,0 +1,112 @@
+<main class="login-stage">
+  <section class="brand-panel" aria-label="TrustSphere platform preview">
+    <nav class="mini-nav">
+      <div class="brand-mark">
+        <span></span>
+        TrustSphere
+      </div>
+      <small>Verification OS</small>
+    </nav>
+
+    <div class="hero-copy">
+      <h1>Verify. Monitor. Protect.</h1>
+      <p class="hero-description">
+        TrustSphere combines identity verification, fraud detection, audit logging, and user
+        governance into a unified enterprise security platform.
+      </p>
+    </div>
+
+    <div class="signal-board">
+      <article class="large-tile">
+        <span>Risk Score</span>
+        <strong>97.4</strong>
+        <small>model confidence</small>
+        <div class="pulse-line"><i></i></div>
+      </article>
+
+      <article>
+        <span>Response Time</span>
+        <strong>42ms</strong>
+      </article>
+
+      <article>
+        <span>Active Alerts</span>
+        <strong>18</strong>
+      </article>
+
+      <article class="wide-tile">
+        <span>System Status</span>
+        <strong>Manual</strong>
+        <small>No background socket starts until enabled.</small>
+      </article>
+    </div>
+  </section>
+
+  <section class="login-panel" aria-label="Sign in">
+    <div class="form-shell">
+      <div class="form-heading">
+        <p class="eyebrow">Secure access</p>
+        <h2>Enter the sphere</h2>
+        <p>Live sync stays off after login. Enable it manually from the dashboard header.</p>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        <div class="field" [class.invalid]="emailInvalid">
+          <input
+            id="email"
+            type="email"
+            placeholder=" "
+            formControlName="email"
+            autocomplete="email"
+          />
+          <label for="email">Work email</label>
+          <small *ngIf="emailInvalid">Use a valid email address.</small>
+        </div>
+
+        <div class="field password-field" [class.invalid]="passwordInvalid">
+          <input
+            id="password"
+            [type]="passwordVisible ? 'text' : 'password'"
+            placeholder=" "
+            formControlName="password"
+            autocomplete="current-password"
+          />
+          <label for="password">Password</label>
+          <button class="ghost-button" type="button" (click)="togglePassword()">
+            {{ passwordVisible ? 'Hide' : 'Show' }}
+          </button>
+          <small *ngIf="passwordInvalid">Password must be at least 6 characters.</small>
+        </div>
+
+        <div class="role-switch" role="group" aria-label="Role">
+          <button
+            type="button"
+            [class.active]="form.value.role === 'ADMIN'"
+            (click)="setRole('ADMIN')"
+          >
+            Admin
+          </button>
+          <button
+            type="button"
+            [class.active]="form.value.role === 'USER'"
+            (click)="setRole('USER')"
+          >
+            User
+          </button>
+        </div>
+
+        <p class="auth-error" *ngIf="authError">{{ authError }}</p>
+
+        <button class="submit-button" type="submit" [disabled]="loading">
+          <span>{{ loading ? 'Verifying' : 'Sign in securely' }}</span>
+          <i></i>
+        </button>
+      </form>
+
+      <div class="bottom-links">
+        <span>New to TrustSphere?</span>
+        <button type="button" (click)="goToRegister()">Create access</button>
+      </div>
+    </div>
+  </section>
+</main>
